@@ -1,0 +1,17 @@
+[
+  {
+    "id": 1,
+    "name": "Cyber Monkeys",
+    "type": "online"
+  },
+  {
+    "id": 2,
+    "name": "Dwarfmart",
+    "type": "local"
+  },
+  {
+    "id": 3,
+    "name": "Hit or Miss",
+    "type": "hybrid"
+  }
+]
