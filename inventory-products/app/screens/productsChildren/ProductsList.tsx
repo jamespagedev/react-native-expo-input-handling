@@ -25,6 +25,7 @@ export default function ProductsList(props: Props): JSX.Element {
           <ProductListItem {...props} prodIndex={index} product={item} />
         )}
         keyExtractor={(item, index) => `${item.name}-${index}`}
+        removeClippedSubviews={false} // <------------------ add this line
       />
     </SafeAreaView>
   );

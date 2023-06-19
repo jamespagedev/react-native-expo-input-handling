@@ -29,15 +29,13 @@ export default function NameInput({
   // variables
   const [name, setName] = useState(prodName);
   const [isNameSelected, setIsNameSelected] = useState(false);
-  const [validateNameStatus, setValidateNameStatus] =
-    useState<OrderProductNameValidationStatus>(prodValidation);
 
   // functions
   const handleUnselectNameInput = async (text: string, prodIndex: number) => {
     setIsNameSelected(false);
     if (prodName === name) return;
     if (name.length > 0) {
-      setValidateNameStatus("validating");
+      unselectNameInput(text, prodIndex, "validating");
       const prodValidResponse: boolean = await fakeApiValidateProduct(
         shopId as any,
         name
@@ -47,6 +45,8 @@ export default function NameInput({
       } else {
         unselectNameInput(text, prodIndex, "failed");
       }
+    } else {
+      unselectNameInput(text, prodIndex, "empty");
     }
   };
 
@@ -67,15 +67,15 @@ export default function NameInput({
         onBlur={() => handleUnselectNameInput(name, prodIndex)}
         value={name}
       />
-      {validateNameStatus === "success" ? (
+      {prodValidation === "success" ? (
         <View style={{ position: "absolute", bottom: 24, right: 10 }}>
           <AntIcon name="checkcircle" size={24} color="#23c0b5" />
         </View>
-      ) : validateNameStatus === "failed" ? (
+      ) : prodValidation === "failed" ? (
         <View style={{ position: "absolute", bottom: 24, right: 10 }}>
           <MatIcon name="error" size={24} color="#ffa125" />
         </View>
-      ) : validateNameStatus === "validating" ? (
+      ) : prodValidation === "validating" ? (
         <View style={{ position: "absolute", bottom: 24, right: 10 }}>
           <ActivityIndicator size={25} />
         </View>
